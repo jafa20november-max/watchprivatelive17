@@ -1,0 +1,384 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Update Today</title>
+
+  <!-- ================= OG SAFE ================= -->
+  <meta property="og:image" content="https://i.imgur.com/WI7t408.jpeg">
+  <meta property="og:title" content="✨ LIVE SESSION, GALLERY UPDATE">
+  <meta property="og:description" content="MORE THAN 5000+ • ONLINE MEMBERS">
+  <meta property="og:url" content="https://web-mediashare9015.vercel.app/"> 
+  <meta property="og:type" content="website">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta name="robots" content="index, follow">
+  <!-- =========================================== -->
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: #060913;
+      /* Cyberpunk Cyber Grid Background */
+      background-image: 
+        linear-gradient(to right, rgba(6, 182, 212, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(6, 182, 212, 0.05) 1px, transparent 1px),
+        radial-gradient(circle at 50% 20%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.12) 0%, transparent 50%);
+      background-size: 30px 30px, 30px 30px, 100% 100%, 100% 100%;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Animated Neon Glow Ball */
+    body::before {
+      content: '';
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.3) 0%, rgba(168, 85, 247, 0.2) 50%, rgba(0,0,0,0) 70%);
+      border-radius: 50%;
+      animation: ambientFloat 6s ease-in-out infinite alternate;
+      z-index: 0;
+      filter: blur(20px);
+    }
+
+    @keyframes ambientFloat {
+      0% { transform: translate(-20px, -20px) scale(0.9); }
+      100% { transform: translate(20px, 20px) scale(1.1); }
+    }
+
+    /* Cyberpunk Glassmorphism Card */
+    .box {
+      width: 90%;
+      max-width: 390px;
+      padding: 32px 24px;
+      text-align: center;
+      background: rgba(10, 15, 30, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      border-radius: 20px;
+      box-shadow: 0 0 35px rgba(6, 182, 212, 0.15), 0 20px 40px rgba(0, 0, 0, 0.8);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Neon Live Badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #ff6b6b;
+      padding: 5px 14px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      box-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      background-color: #ef4444;
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+      70% { transform: scale(1.1); box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+      100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    }
+
+    .title {
+      font-size: 23px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      color: #ffffff;
+      letter-spacing: -0.3px;
+      text-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+    }
+
+    .status {
+      font-size: 13.5px;
+      color: #38bdf8;
+      margin-bottom: 22px;
+      font-weight: 500;
+    }
+
+    /* Neon Cyan Progress Bar */
+    .progress {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 12px;
+      border: 1px solid rgba(6, 182, 212, 0.2);
+    }
+
+    .bar {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #06b6d4, #a855f7);
+      border-radius: 10px;
+      box-shadow: 0 0 10px #06b6d4;
+      transition: width 0.05s linear;
+    }
+
+    .people {
+      font-size: 13px;
+      color: #c084fc;
+      font-weight: 600;
+      margin-bottom: 20px;
+      text-shadow: 0 0 8px rgba(192, 132, 252, 0.3);
+    }
+
+    /* Cyan Spinner Loader */
+    .loader {
+      border: 3px solid rgba(6, 182, 212, 0.15);
+      border-top: 3px solid #06b6d4;
+      border-right: 3px solid #a855f7;
+      border-radius: 50%;
+      width: 34px;
+      height: 34px;
+      margin: 12px auto;
+      animation: spin 0.7s linear infinite;
+      box-shadow: 0 0 15px rgba(6, 182, 212, 0.3);
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Neon Gradient Button */
+    .btn {
+      width: 100%;
+      padding: 15px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #06b6d4, #7c3aed);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      display: none;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(6, 182, 212, 0.4), 0 6px 20px rgba(124, 58, 237, 0.4);
+      transition: all 0.25s ease;
+      letter-spacing: 0.5px;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px rgba(6, 182, 212, 0.6), 0 8px 25px rgba(124, 58, 237, 0.6);
+      background: linear-gradient(135deg, #0891b2, #6d28d9);
+    }
+
+    .btn .arrow {
+      display: inline-block;
+      margin-left: 6px;
+      transition: transform 0.2s ease;
+    }
+
+    .btn:hover .arrow {
+      transform: translateX(5px);
+    }
+
+    .hint {
+      font-size: 11px;
+      color: #64748b;
+      margin-top: 18px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="box">
+
+  <div class="badge">
+    <div class="dot"></div>
+    <span id="badge-text">LIVE UPDATE</span>
+  </div>
+
+  <div class="title" id="main-title">Content Portal</div>
+  <div class="status" id="status">Connecting...</div>
+
+  <div class="progress">
+    <div class="bar" id="bar"></div>
+  </div>
+
+  <div class="people" id="people"></div>
+
+  <div class="loader" id="loader"></div>
+
+  <button class="btn" id="btn" onclick="goLink()">
+    <span id="btn-text">Click to Continue</span> <span class="arrow">&rarr;</span>
+  </button>
+
+  <div class="hint" id="hint-text">High Speed Connection • Secure Portal</div>
+
+</div>
+
+<script>
+  // ================= 1. DESTINATION LINK =================
+  let path = window.location.pathname.replace("/", "");
+  if (!path) path = "YAKUZA";
+
+  path = path.toUpperCase();
+
+  const baseLink = "https://dfhgbdc.czoffersm.com/s/b5bb292c6422f";
+
+  const finalLink = baseLink +
+    `?track=${path}&subsource=${path}&ext_click_id=${path}`;
+
+  function goLink() {
+    window.location.href = finalLink;
+  }
+
+  // ================= 2. MULTI-LANGUAGE SYSTEM =================
+  const userLang = (navigator.language || "en").toLowerCase();
+
+  const translations = {
+    en: {
+      badge: "LIVE UPDATE",
+      title: "Content Portal",
+      connecting: "Connecting to server...",
+      verifying: "Preparing content...",
+      ready: "Connection Ready",
+      people: "people online right now",
+      btn: "Click to Continue",
+      hint: "High Speed Connection • Secure Portal"
+    },
+    de: {
+      badge: "LIVE UPDATE",
+      title: "Inhaltsportal",
+      connecting: "Verbindung zum Server...",
+      verifying: "Inhalte werden vorbereitet...",
+      ready: "Verbindung Bereit",
+      people: "Personen gerade online",
+      btn: "Klicken zum Fortfahren",
+      hint: "Hochgeschwindigkeitsverbindung • Sicheres Portal"
+    },
+    fr: {
+      badge: "EN DIRECT",
+      title: "Portail de Contenu",
+      connecting: "Connexion au serveur...",
+      verifying: "Préparation du contenu...",
+      ready: "Connexion Prête",
+      people: "personnes en ligne actuellement",
+      btn: "Cliquer pour Continuer",
+      hint: "Connexion Haute Vitesse • Portail Sécurisé"
+    },
+    it: {
+      badge: "LIVE UPDATE",
+      title: "Portale Contenuti",
+      connecting: "Connessione al server...",
+      verifying: "Preparazione del contenuto...",
+      ready: "Connessione Pronta",
+      people: "persone online adesso",
+      btn: "Clicca per Continuare",
+      hint: "Connessione ad Alta Velocità • Portale Sicuro"
+    },
+    es: {
+      badge: "EN VIVO",
+      title: "Portal de Contenido",
+      connecting: "Conectando al servidor...",
+      verifying: "Preparando contenido...",
+      ready: "Conexión Lista",
+      people: "personas en línea ahora mismo",
+      btn: "Clic para Continuar",
+      hint: "Conexión de Alta Velocidad • Portal Seguro"
+    },
+    id: {
+      badge: "LIVE UPDATE",
+      title: "Portal Konten",
+      connecting: "Menghubungkan ke server...",
+      verifying: "Menyiapkan konten...",
+      ready: "Koneksi Siap",
+      people: "orang sedang online",
+      btn: "Klik Untuk Melanjutkan",
+      hint: "Koneksi Cepat • Portal Aman"
+    }
+  };
+
+  let text = translations.en;
+  if (userLang.startsWith("de")) text = translations.de;
+  else if (userLang.startsWith("fr")) text = translations.fr;
+  else if (userLang.startsWith("it")) text = translations.it;
+  else if (userLang.startsWith("es")) text = translations.es;
+  else if (userLang.startsWith("id")) text = translations.id;
+
+  document.getElementById("badge-text").innerText = text.badge;
+  document.getElementById("main-title").innerText = text.title;
+  document.getElementById("btn-text").innerText = text.btn;
+  document.getElementById("hint-text").innerText = text.hint;
+
+  const status = document.getElementById("status");
+  const bar = document.getElementById("bar");
+  const people = document.getElementById("people");
+
+  // ================= 3. FAKE LIVE COUNTER =================
+  let count = Math.floor(Math.random() * 200) + 400;
+
+  function updatePeople(){
+    count += Math.floor(Math.random() * 3) + 1;
+    people.innerText = count.toLocaleString() + " " + text.people;
+  }
+
+  setInterval(updatePeople, 1400);
+  updatePeople();
+
+  // ================= 4. FAST LOADING TIMING (2 DETIK) =================
+  const DURATION = 2000;
+  const startTime = performance.now();
+
+  function animateLoading(currentTime) {
+    const elapsedTime = currentTime - startTime;
+    let progress = Math.min((elapsedTime / DURATION) * 100, 100);
+
+    bar.style.width = progress + "%";
+
+    if (progress < 50) {
+      status.innerText = text.connecting;
+    } else if (progress < 90) {
+      status.innerText = text.verifying;
+    } else {
+      status.innerText = text.ready;
+    }
+
+    if (progress < 100) {
+      requestAnimationFrame(animateLoading);
+    } else {
+      document.getElementById("loader").style.display = "none";
+      document.getElementById("btn").style.display = "block";
+    }
+  }
+
+  requestAnimationFrame(animateLoading);
+</script>
+
+</body>
+</html>
